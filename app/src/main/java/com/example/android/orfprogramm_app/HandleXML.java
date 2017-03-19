@@ -64,7 +64,7 @@ public class HandleXML {
                         }
                         event = myParser.next();
                 }
-                parsingComplete = false;ygfbd
+                parsingComplete = false;
             }catch (Exception e) {
                 e.printStackTrace();
             }
