@@ -2,6 +2,8 @@ package com.example.android.orfprogramm_app;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -27,6 +29,27 @@ public class ORF1Activity extends AppCompatActivity {
     private String url1 = "http://rss.orf.at/orfeins.xml";
     private String url2 = "&mode=xml";
     private HandleXML obj;
+    Button refresh;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_orf1);
+        refresh = (Button) findViewById(R.id.refresh);
+        text1 = (EditText) findViewById(R.id.textTitle);
+        text2 = (EditText) findViewById(R.id.textLink);
+        text3 = (EditText) findViewById(R.id.textDescription);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view){
+
+                while (obj.parsingComplete);
+                text1.setText (obj.getTitle;)
+                text2.setText(obj.getLink);
+                text3.setText (obj.getDescription);
+            }
+        }
 
 
 

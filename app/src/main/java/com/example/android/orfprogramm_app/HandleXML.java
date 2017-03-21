@@ -3,6 +3,10 @@ package com.example.android.orfprogramm_app;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 import static android.view.View.X;
 
 /**
@@ -14,26 +18,26 @@ public class HandleXML {
     private String link = "link";
     private String description = "description";
     private String urlString = null;
-    private XmlPullParserFactory,xmlFactoryObject;
+    private XmlPullParserFactory xmlFactoryObject;
     private volatile boolean parsingComplete = true;
 
     public HandleXML(String url) {
         this.urlString = url;
     }
 
-    public String getTitle
+    public String getTitle ()
 
     {
         return title;
     }
 
-    public String getLink
+    public String getLink ()
 
     {
         return link;
     }
 
-    public String getDescription
+    public String getDescription ()
 
     {
         return description;
@@ -44,7 +48,8 @@ public class HandleXML {
         String text = null;
         try {
             event = myParser.getEventType();
-            while (event != XmlPullParser.END_DOCUMENT) {
+            while (event != XmlPullParser.END_DOCUMENT)
+            {
                 String name = myParser.getName();
                 switch (event) {
                     case XmlPullParser.START_TAG:
@@ -63,11 +68,40 @@ public class HandleXML {
                             break;
                         }
                         event = myParser.next();
-                }
+                            }
                 parsingComplete = false;
-            }catch (Exception e) {
-                e.printStackTrace();
             }
+            }catch(Exception e){
+            e.printStackTrace();
         }
-        public void fetchXML() {} /*TODO
+    }
+        public void fetchXML() {
+            Thread thread = new Thread (new Runnable(){
+                @Override
+                public void run (){
+                    try {
+                    URL url = new URL (urlString);
+                        HttpURLConnection connect= (HttpURLConnection)url.openConnection();
+                        connect.setReadTimeout(10000);
+                        connect.setConnectTimeout(15000);
+                        connect.setRequestMethod("GET");
+                        connect.setDoInput(true);
+                        connect.connect();
+                        InputStream stream = connect.getInputStream ();
+                        xmlFactoryObject = XmlPullParserFactory.newInstance();
+                        XmlPullParser myparser = xmlFactoryObject.newPullParser();
+                        myparser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+                        myparser.setInput(stream, null);
+                        parseXMLAndStorelt (myparser);
+                        stream.close();
+
+                    }catch
+                    } (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            });
+    thread.start();
+    }
+}
     }

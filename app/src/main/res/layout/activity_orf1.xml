@@ -26,21 +26,27 @@
         android:id="@+id/textTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@id/textView2"
         android:text="@string/title"
         />
     <EditText
         android:id="@+id/textLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textTitle"
+        android:layout_below="@id/textTitle"
         android:text="@string/link"
         />
     <EditText
         android:id="@+id/textDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textLink"
+        android:layout_below="@id/textLink"
         android:text="@string/description"
         />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Refresh"
+        android:id = "@+id/refresh"
+        android:layout_below= "@id/textDescription"/>
 </RelativeLayout>
