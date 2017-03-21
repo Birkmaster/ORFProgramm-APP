@@ -1,5 +1,12 @@
 package com.example.android.orfprogramm_app;
+import android.util.Xml;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,10 +32,10 @@ import android.app.Activity;
 
 
 public class ORF1Activity extends AppCompatActivity {
-    private EditText text1, text2, text3;
+    public EditText text1, text2, text3;
     private String url1 = "http://rss.orf.at/orfeins.xml";
     private String url2 = "&mode=xml";
-    private HandleXML obj;
+    public HandleXML obj;
     Button refresh;
 
 
@@ -40,19 +47,19 @@ public class ORF1Activity extends AppCompatActivity {
         text1 = (EditText) findViewById(R.id.textTitle);
         text2 = (EditText) findViewById(R.id.textLink);
         text3 = (EditText) findViewById(R.id.textDescription);
-        refresh.setOnClickListener(new View.OnClickListener() {
+        refresh.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick (View view){
+            public void onClick(View view) {
 
-                while (obj.parsingComplete);
-                text1.setText (obj.getTitle;)
-                text2.setText(obj.getLink);
-                text3.setText (obj.getDescription);
+                while (obj.parsingComplete) ;
+                text1.setText(obj.getTitle());
+                text2.setText(obj.getLink());
+                text3.setText(obj.getDescription());
             }
-        }
+        });
 
 
-
+    }
 }
 
 
@@ -95,5 +102,4 @@ public class ORF1Activity extends AppCompatActivity {
 
     }
 
-
-}
+**/

@@ -1,5 +1,6 @@
 package com.example.android.orfprogramm_app;
 
+import android.util.Xml;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
@@ -14,12 +15,12 @@ import static android.view.View.X;
  */
 
 public class HandleXML {
-    private String title = "title";
-    private String link = "link";
-    private String description = "description";
+    public String title = "title";
+    public String link = "link";
+    public String description = "description";
     private String urlString = null;
     private XmlPullParserFactory xmlFactoryObject;
-    private volatile boolean parsingComplete = true;
+    public volatile boolean parsingComplete = true;
 
     public HandleXML(String url) {
         this.urlString = url;
@@ -43,7 +44,7 @@ public class HandleXML {
         return description;
     }
 
-    public void parsXMLandStorelt(XmlPullParser myParser) {
+    public void parseXMLAndStoreIt(XmlPullParser myParser) {
         int event;
         String text = null;
         try {
@@ -92,11 +93,10 @@ public class HandleXML {
                         XmlPullParser myparser = xmlFactoryObject.newPullParser();
                         myparser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
                         myparser.setInput(stream, null);
-                        parseXMLAndStorelt (myparser);
+                        parseXMLAndStoreIt (myparser);
                         stream.close();
 
-                    }catch
-                    } (Exception e){
+                    }catch (Exception e){
                         e.printStackTrace();
                     }
                 }
@@ -104,4 +104,4 @@ public class HandleXML {
     thread.start();
     }
 }
-    }
+
