@@ -32,10 +32,9 @@ import android.app.Activity;
 
 
 public class ORF1Activity extends AppCompatActivity {
-    public EditText text1, text2, text3;
+    private EditText text1, text2, text3;
     private String url1 = "http://rss.orf.at/orfeins.xml";
-    private String url2 = "&mode=xml";
-    public HandleXML obj;
+    private HandleXML obj;
     Button refresh;
 
 
@@ -47,21 +46,38 @@ public class ORF1Activity extends AppCompatActivity {
         text1 = (EditText) findViewById(R.id.textTitle);
         text2 = (EditText) findViewById(R.id.textLink);
         text3 = (EditText) findViewById(R.id.textDescription);
-        refresh.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
+        refresh.setOnClickListener(new View.OnClickListener() {
+                                       @Override
 
-                while (obj.parsingComplete) ;
-                text1.setText(obj.getTitle());
-                text2.setText(obj.getLink());
-                text3.setText(obj.getDescription());
-            }
+                                       public void onClick(View view) {
+                                           obj = new HandleXML(url1);
+                                           obj.fetchXML();
+
+                                           while (obj.parsingComplete) {
+                                               text1.setText(obj.getTitle());
+                                               text2.setText(obj.getLink());
+                                               text3.setText(obj.getDescription());
+                                           }
+
+                                       };
         });
 
 
+/**        @Override    public boolean onCreateOptionsMenu(Menu menu) {
+            // Inflate the menu; this adds items to the action bar if it is present.        getMenuInflater().inflate(R.menu.menu_main, menu);
+            return true;
+        }
+
+        @Override    public boolean onOptionsItemSelected(MenuItem item) {
+            // Handle action bar item clicks here. The action bar will        // automatically handle clicks on the Home/Up button, so long        // as you specify a parent activity in AndroidManifest.xml.        int id = item.getItemId();
+
+            //noinspection SimplifiableIfStatement        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);**/
     }
 }
-
 
 
 

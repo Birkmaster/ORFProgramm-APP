@@ -18,4 +18,5 @@ public class TVActivity extends AppCompatActivity {
                 startActivity(new Intent(TVActivity.this, ORF1Activity.class));
             }
         });
-    }}
+    }
+}

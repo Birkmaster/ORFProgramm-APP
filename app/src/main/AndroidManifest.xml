@@ -22,7 +22,15 @@
             android:name="com.google.android.gms.version"
             android:value="8487000" />
 
-        <activity android:name=".TVActivity" />
+        <activity android:name=".TVActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ORF1Activity" />
+
     </application>
 
 </manifest>

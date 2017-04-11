@@ -4,6 +4,7 @@ import android.util.Xml;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -15,9 +16,9 @@ import static android.view.View.X;
  */
 
 public class HandleXML {
-    public String title = "title";
-    public String link = "link";
-    public String description = "description";
+    private String title = "title";
+    private String link = "link";
+    private String description = "description";
     private String urlString = null;
     private XmlPullParserFactory xmlFactoryObject;
     public volatile boolean parsingComplete = true;
@@ -83,12 +84,13 @@ public class HandleXML {
                     try {
                     URL url = new URL (urlString);
                         HttpURLConnection connect= (HttpURLConnection)url.openConnection();
-                        connect.setReadTimeout(10000);
-                        connect.setConnectTimeout(15000);
-                        connect.setRequestMethod("GET");
-                        connect.setDoInput(true);
-                        connect.connect();
-                        InputStream stream = connect.getInputStream ();
+                        //connect.setReadTimeout(10000);
+                        //connect.setConnectTimeout(15000);
+                        //connect.setRequestMethod("GET");
+                        //connect.setDoInput(true);
+                        //connect.connect();
+                        int status = connect.getResponseCode();
+                        InputStream stream = new BufferedInputStream(connect.getInputStream());
                         xmlFactoryObject = XmlPullParserFactory.newInstance();
                         XmlPullParser myparser = xmlFactoryObject.newPullParser();
                         myparser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
